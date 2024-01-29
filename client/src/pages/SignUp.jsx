@@ -4,7 +4,7 @@ import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import { useState } from 'react'
 import axios from 'axios'
 
-export const SignUp = () => {
+ export const SignUp = () => {
   const [formData, setFormData] = useState({});
   const [errorMessage, setErroMessage] = useState(null)
   const [loading, setLoading] = useState(false);
@@ -113,3 +113,4 @@ export const SignUp = () => {
     </div>
   )
 }
+
