@@ -1,14 +1,18 @@
 
-import { Link,useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import { useState } from 'react'
 import axios from 'axios'
+import {useDispatch,useSelector} from 'react-redux'
+import { signInStart,signInFailure,signInSuccess } from '../redux/user/userSlice'
 
- export const SignIn = () => {
+export const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErroMessage] = useState(null)
-  const [loading, setLoading] = useState(false);
-  const navigate=useNavigate()
+  // const [errorMessage, setErroMessage] = useState(null)
+  // const [loading, setLoading] = useState(false);
+  const {loading,error:errorMessage}=useSelector(state=>state.user)
+  const dispatch=useDispatch()
+  const navigate = useNavigate()
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -18,26 +22,33 @@ import axios from 'axios'
   console.log(formData);
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (  !formData.email || !formData.password) {
-      return setErroMessage('Please fill out all Fields');
+    if (!formData.email || !formData.password) {
+      // return setErroMessage('Please fill out all Fields');
+        return dispatch(signInFailure("All Fields are required"))
     }
     try {
-      setLoading(true)
-      setErroMessage(null)
-      const res = await axios.post('/api/auth/signin', formData, {
+      // setLoading(true)
+      // setErroMessage(null)
+        dispatch(signInStart());
+        const res = await axios.post('/api/auth/signin', formData, {
         headers: { 'Content-Type': 'application/json' }
       });
+      
       if (res.status === 200) {
+        dispatch(signInSuccess(res))
         // Assuming HTTP status 200 indicates success
         navigate('/');
       }
-     
-      setLoading(false)
+      // setLoading(false)
       // Handle the response data as needed
     } catch (error) {
-      setErroMessage(error.message)
-      setLoading(false)
+      // setErroMessage(error.message)
+      // setLoading(false)
+   
+      dispatch(signInFailure(error.response.data.message));
       // Handle the error
+    
+ 
     }
   }
   return (
@@ -65,7 +76,7 @@ import axios from 'axios'
         {/* right side  */}
         <div className="flex-1">
           <form className='flex flex-col gap-2' onSubmit={handleSubmit}>
-            
+
             <div className="">
               <Label value='Your email' />
               <TextInput type='email' placeholder='name@company.com' id='email' onChange={handleChange} />
