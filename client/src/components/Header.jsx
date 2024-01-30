@@ -3,9 +3,12 @@ import { Link,useLocation } from "react-router-dom";
 import { AiOutlineSearch } from 'react-icons/ai'
 import { FaMoon } from 'react-icons/fa'
 import { NavbarCollapse } from "flowbite-react";
+import { useSelector } from "react-redux";
 
 export default function Header() {
     const path=useLocation().pathname
+    const {currentUser}=useSelector(state=>state.user);
+    console.log(currentUser)
     return (
         <Navbar className=" border-b-2">
             <Link to='/' className=" self-center whitespace-nowrap

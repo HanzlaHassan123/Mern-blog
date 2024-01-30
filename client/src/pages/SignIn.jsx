@@ -34,9 +34,9 @@ export const SignIn = () => {
         const res = await axios.post('/api/auth/signin', formData, {
         headers: { 'Content-Type': 'application/json' }
       });
-
+      console.log(res.data)
       if (res.status === 200) {
-        dispatch(signInSuccess(res))
+        dispatch(signInSuccess(res.data))
         // Assuming HTTP status 200 indicates success
         navigate('/');
       }
@@ -45,7 +45,7 @@ export const SignIn = () => {
     } catch (error) {
       // setErroMessage(error.message)
       // setLoading(false)
-      dispatch(signInFailure(error.response.data.message));
+      dispatch(signInFailure(JSON.stringify(error.response.data.message)));
     }
   }
   return (

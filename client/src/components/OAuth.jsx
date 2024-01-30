@@ -22,11 +22,10 @@ export default function OAuth() {
                 email: resultsFromGoogle.user.email,
                 googlePhoto: resultsFromGoogle.user.photoURL
             }, { headers: { 'Content-Type': 'application/json' } });
-
+              console.log(res.data)
             if (res.status === 200) {
-                dispatch(signInSuccess(res))
+                dispatch(signInSuccess(res.data))
                 navigate('/')
-
             }
 
         } catch (error) {
