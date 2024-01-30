@@ -33,7 +33,7 @@ export const SignIn = () => {
         const res = await axios.post('/api/auth/signin', formData, {
         headers: { 'Content-Type': 'application/json' }
       });
-      
+
       if (res.status === 200) {
         dispatch(signInSuccess(res))
         // Assuming HTTP status 200 indicates success
@@ -44,11 +44,7 @@ export const SignIn = () => {
     } catch (error) {
       // setErroMessage(error.message)
       // setLoading(false)
-   
       dispatch(signInFailure(error.response.data.message));
-      // Handle the error
-    
- 
     }
   }
   return (
