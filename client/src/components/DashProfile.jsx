@@ -12,6 +12,7 @@ export default function DashProfile() {
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
+  const [formData,setFormData]=useState({})
   const filePickerRef = useRef();
 
   const handleImageChange = (e) => {

@@ -19,11 +19,8 @@ export default function DashSidebar() {
     return (
         <Sidebar className='w-full md:w-56'>
             <Sidebar.Items>
-
                 <Sidebar.ItemGroup>
-                    <Link
-                        to='/dashboard?tab=profile'
-                    >
+                    <Link to='/dashboard?tab=profile'>
                         <Sidebar.Item
                             active={tab === 'profile'}
                             icon={HiUser}
@@ -31,10 +28,7 @@ export default function DashSidebar() {
                             as='div'
                             labelColor='dark'>
                             Profile
-
                         </Sidebar.Item>
-
-
                     </Link>
                     <Sidebar.Item icon={HiArrowSmRight}
                         className='cursor-pointer' >
