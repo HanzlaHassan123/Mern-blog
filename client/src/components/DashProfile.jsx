@@ -18,9 +18,8 @@ export default function DashProfile() {
   const [imageFileUploading, setImageFileUploading] = useState(false)
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null)
   const [updateUserError, setUpdateUserError] = useState(null)
-
-
   const [formData, setFormData] = useState({})
+  console.log(formData);
   const filePickerRef = useRef();
   const dispatch = useDispatch()
   const handleImageChange = (e) => {
@@ -85,7 +84,7 @@ export default function DashProfile() {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value })
   }
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -100,8 +99,8 @@ export default function DashProfile() {
     }
 
     try {
-      dispatch(updateStart());
-      const res = await axios.put(`/api/user/update/${currentUser._id}`, formData, {
+       dispatch(updateStart());
+        const res = await axios.put(`/api/user/update/${currentUser._id}`, formData, {
         headers: { 'Content-Type': 'application/json' },
       });
 
@@ -110,15 +109,15 @@ export default function DashProfile() {
       if (res.status === 200) {
         dispatch(signInSuccess(data));
         setUpdateUserSuccess("User's profile updated SuccessFully")
-
-
       } else {
         dispatch(updateFailure(data.message));
         setUpdateUserError(data.message)
       }
     } catch (error) {
-      dispatch(updateFailure(error.message));
-      setUpdateUserError(error.message);
+      const responseData = error.response.data;
+      const errorMessage = responseData.message 
+      dispatch(updateFailure(errorMessage));
+      setUpdateUserError(errorMessage);
     }
   };
 

@@ -6,15 +6,16 @@ import userRoutes from './routes/user.route.js'
 import authRoutes from './routes/auth.route.js'
 import cookieParser from "cookie-parser";
 
+
 dotenv.config()
 
 mongoose.connect(process.env.MONGO_URL)
-    .then(() => {
-        console.log('MongoDB is connected');
-    })
-    .catch((err) => {
-        console.error('Error connecting to MongoDB:', err);
-    });
+.then(() => {
+    console.log('MongoDB is connected');
+})
+.catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+});
 
 const app = express();
 app.use(express.json())
