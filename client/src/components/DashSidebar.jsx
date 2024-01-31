@@ -28,8 +28,10 @@ export default function DashSidebar() {
                             active={tab === 'profile'}
                             icon={HiUser}
                             label="user"
+                            as='div'
                             labelColor='dark'>
                             Profile
+
                         </Sidebar.Item>
 
 
