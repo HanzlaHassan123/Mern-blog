@@ -24,6 +24,7 @@ export default function OAuth() {
             }, { headers: { 'Content-Type': 'application/json' } });
               console.log(res.data)
             if (res.status === 200) {
+
                 dispatch(signInSuccess(res.data))
                 navigate('/')
             }
