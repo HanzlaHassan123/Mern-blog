@@ -7,6 +7,7 @@ import { DashBoard } from "./pages/DashBoard"
 import { Projects } from "./pages/Projects"
 import Header from "./components/Header"
 import FooterComp from "./components/FooterComp"
+import PrivateRoutes from "./components/PrivateRoutes"
 
 export default function App () {
   return (
@@ -17,7 +18,9 @@ export default function App () {
       <Route path="/about" element={<About/>}/>
       <Route path="/Sign-in" element={<SignIn/>}/>
       <Route path="/Sign-up" element={<SignUp/>}/>
+      <Route element={<PrivateRoutes/>}>    
       <Route path="/dashboard" element={<DashBoard/>}/>
+        </Route>
       <Route path="/projects" element={<Projects/>}/>
      </Routes>
      <FooterComp/>
