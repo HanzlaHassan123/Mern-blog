@@ -10,6 +10,7 @@ export const verifyUser = (req, res, next) => {
       return next(errorHandler(401, 'Unauthorized'));
     }
     req.user = user;
+    console.log("from verify user"+req.user);
     next();
   });
 };
